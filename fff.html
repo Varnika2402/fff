@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Father's Day!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@400;600;700;800;900&family=Raleway:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: linear-gradient(-45deg, #0f0f23, #1a1a2e, #16213e, #0f3460, #1e1e2e, #2d1b69);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            position: relative;
+            color: #ffffff;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: linear-gradient(45deg, #64ffda, #1de9b6, #00bcd4);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+            opacity: 0.1;
+        }
+
+        .particle:nth-child(1) { width: 60px; height: 60px; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 90px; height: 90px; left: 25%; animation-delay: 3s; }
+        .particle:nth-child(3) { width: 40px; height: 40px; left: 60%; animation-delay: 6s; }
+        .particle:nth-child(4) { width: 70px; height: 70px; left: 80%; animation-delay: 9s; }
+        .particle:nth-child(5) { width: 50px; height: 50px; left: 35%; animation-delay: 2s; }
+        .particle:nth-child(6) { width: 80px; height: 80px; left: 75%; animation-delay: 5s; }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header {
+            margin-bottom: 50px;
+            animation: slideInDown 1.2s ease-out;
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #64ffda, #1de9b6, #00e5ff, #64ffda);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGlow 4s ease-in-out infinite, gradientShift 8s ease infinite;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            filter: drop-shadow(0 0 20px rgba(100, 255, 218, 0.3));
+        }
+
+        .header p {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #b0bec5;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .photo-section {
+            background: rgba(15, 15, 35, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 50px;
+            margin: 50px 0;
+            box-shadow: 
+                0 25px 50px rgba(0,0,0,0.5),
+                0 0 0 1px rgba(100, 255, 218, 0.1),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            animation: slideInUp 1.2s ease-out 0.3s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(100, 255, 218, 0.05), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 6s ease-in-out infinite;
+        }
+
+        .photo-frame {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 40px;
+            border: 4px solid transparent;
+            background: linear-gradient(45deg, #64ffda, #1de9b6, #00e5ff, #64ffda) border-box;
+            border-radius: 0; /* Square */
+            overflow: hidden;
+            box-shadow: 
+                0 20px 40px rgba(0,0,0,0.6),
+                0 0 0 8px rgba(15, 15, 35, 0.8),
+                0 0 0 12px rgba(100, 255, 218, 0.2),
+                0 0 60px rgba(100, 255, 218, 0.3);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+        }
+
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            background: linear-gradient(45deg, #64ffda, #1de9b6, #00e5ff, #64ffda);
+            border-radius: 0; /* Square */
+            z-index: -1;
+            animation: rotate 6s linear infinite;
+        }
+
+        .photo-frame:hover {
+            transform: scale(1.08) rotate(5deg);
+            box-shadow: 
+                0 30px 60px rgba(0,0,0,0.7),
+                0 0 0 12px rgba(15, 15, 35, 0.9),
+                0 0 0 16px rgba(100, 255, 218, 0.3),
+                0 0 100px rgba(100, 255, 218, 0.5);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0; /* Square */
+        }
+
+        .message {
+            font-family: 'Raleway', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #e8eaf6;
+            line-height: 1.8;
+            max-width: 750px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .message strong {
+            color: #64ffda;
+            font-weight: 800;
+        }
+
+        .trophy-button {
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1de9b6, #64ffda, #00e5ff);
+            background-size: 200% 200%;
+            color: #0f0f23;
+            border: none;
+            padding: 20px 45px;
+            font-size: 1.4rem;
+            border-radius: 30px;
+            cursor: pointer;
+            margin: 50px 0;
+            box-shadow: 
+                0 15px 35px rgba(29, 233, 182, 0.3),
+                inset 0 2px 0 rgba(255,255,255,0.2);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: buttonGlow 4s ease-in-out infinite, gradientShift 8s ease infinite;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .trophy-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+        }
+
+        .trophy-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .trophy-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 20px 40px rgba(29, 233, 182, 0.4),
+                inset 0 2px 0 rgba(255,255,255,0.3);
+        }
+
+        .trophy-container {
+            display: none;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            border-radius: 25px;
+            padding: 60px;
+            margin: 40px 0;
+            box-shadow: 
+                0 30px 60px rgba(0,0,0,0.8),
+                0 0 0 2px rgba(255, 215, 0, 0.3),
+                inset 0 2px 0 rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .trophy-container::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffc107, #ffd700);
+            border-radius: 25px;
+            z-index: -1;
+            animation: rotate 10s linear infinite;
+            opacity: 0.6;
+        }
+
+        .trophy-container.show {
+            display: block;
+            animation: trophyReveal 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .trophy {
+            font-size: 7rem;
+            margin-bottom: 30px;
+            animation: trophyEntrance 2s ease-out, trophyFloat 4s ease-in-out infinite 2s;
+            filter: drop-shadow(0 15px 25px rgba(255, 215, 0, 0.4));
+        }
+
+        .trophy-text {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            color: #ffd700;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            animation: textPulse 3s ease-in-out infinite;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .trophy-message {
+            font-family: 'Raleway', sans-serif;
+            color: #e8eaf6;
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .trophy-message strong {
+            color: #64ffda;
+            font-size: 1.4rem;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .floating-item {
+            position: absolute;
+            font-size: 2rem;
+            animation: floatUp 5s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-80px) rotate(180deg); }
+        }
+
+        @keyframes slideInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0px) scale(1);
+            }
+        }
+
+        @keyframes slideInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(100px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0px) scale(1);
+            }
+        }
+
+        @keyframes textGlow {
+            0%, 100% { filter: brightness(1) contrast(1); }
+            50% { filter: brightness(1.3) contrast(1.2); }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes buttonGlow {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 15px 35px rgba(29, 233, 182, 0.3);
+            }
+            50% { 
+                transform: scale(1.02);
+                box-shadow: 0 18px 40px rgba(29, 233, 182, 0.4);
+            }
+        }
+
+        @keyframes trophyReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotateY(-180deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1) rotateY(-90deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotateY(0deg);
+            }
+        }
+
+        @keyframes trophyEntrance {
+            0% { transform: translateY(-50px) scale(0.5); opacity: 0; }
+            50% { transform: translateY(-10px) scale(1.1); opacity: 1; }
+            100% { transform: translateY(0px) scale(1); opacity: 1; }
+        }
+
+        @keyframes trophyFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes textPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) scale(1) rotate(45deg);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(-10vh) scale(1.1) rotate(180deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-20vh) scale(0) rotate(360deg);
+            }
+        }
+
+        @keyframes confettiBurst {
+            0% {
+                transform: translateY(-50px) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            animation: confettiBurst 4s linear forwards;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 3rem; }
+            .header p { font-size: 1.2rem; }
+            .photo-frame { width: 250px; height: 250px; }
+            .trophy { font-size: 5rem; }
+            .trophy-text { font-size: 1.8rem; }
+            .trophy-button { font-size: 1.1rem; padding: 18px 35px; }
+            .container { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="floating-elements" id="floatingContainer"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>HAPPY FATHER'S DAY</h1>
+            <p>Celebrating an Extraordinary Father</p>
+        </div>
+
+        <div class="photo-section">
+            <div class="photo-frame">
+                <img src="ff1.jpg" alt="Dad's Photo" id="dadPhoto">
+                <img src="ff2.jpg" alt="Dad's Photo" id="dadPhoto">
+                <img src="ff3.jpg" alt="Dad's Photo" id="dadPhoto">
+                <img src="ff4.jpg" alt="Dad's Photo" id="dadPhoto">
+                <img src="ff5.jpg" alt="Dad's Photo" id="dadPhoto">
+                <img src="ff6.jpg" alt="Dad's Photo" id="dadPhoto">
+                <img src="ff7.jpg" alt="Dad's Photo" id="dadPhoto">
+            </div>
+            <div class="message">
+                <p><strong>Dear Daddy,</strong></p>
+                <br>
+                <p>I don’t think I’ve ever properly said this… but you’re honestly the best.  
+                   You spoil me more than I deserve 😅, and love me more than I even realize most days.
+                   You always try to give me the best—whether it’s things I ask for or even things I never knew I needed.
+                   You work so hard,. I seriously don’t know how you do it, but I notice it… even if I don’t say it often.
+                   I know I drive you mad sometimes (ok, maybe a lot of times 😄), especially with the solo trip thing.
+                   It’s been a whole year and you still haven’t said yes.I keep asking and you keep saying “not now”… (plz say yes as a fathers day gift to me)
+                   I also know you have high expectations—especially when it comes to studies.But it’s okay.
+                   And yes, I may not be the topper you dream of (yet), but I’m trying… in my own way, at my own pace.
+                   Sometimes you’re strict, sometimes you’re soft, sometimes you say things that stay in my head for days, and sometimes you make me laugh when I’m trying to stay mad at you.
+                   You’re a mix of everything—and honestly, that’s what makes you best father.<br>
+                   
+                   Thank you for all the love, the mini lectures,the concern in your voice when I’m tired, and even the way you silently check on me when I pretend to be okay.
+                   I may not always say it, but I do feel lucky to be your daughter.
+                   You may not say I love you a lot—but your way of loving is louder than any words.
+                   One day I’ll go on that solo trip 😛 and one day you’ll see that I turned out to be how you wanted me to be. <br>
+                   
+                   <strong>Love you always Stupid Fellow💙</strong><br>
+                -Your World's best daughter<br>
+            Who still thinks your the coolest father even when you don't allow her for all the things she want</p>
+                
+            </div>
+        </div>
+
+        <button class="trophy-button" onclick="showTrophy()">
+            🏆 REVEAL ACHIEVEMENT 🏆
+        </button>
+
+        <div class="trophy-container" id="trophyContainer">
+            <div class="trophy">🏆</div>
+            <div class="trophy-text">LEGENDARY FATHER</div>
+            <div class="trophy-message">
+                <strong>🎖️ YOU DESERVE THIS 🎖️</strong><br><br>
+                ✦ Master of Life Guidance<br>
+                ✦ Solo trip Denier<br>
+                ✦ Silent Care Giver<br>
+                ✦ News Paper Addict<br>
+                ✦ Forever ATM<br>
+                ✦ Unexpected Lecture Dropper
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Use local image files in the same folder as your HTML file
+        const photoUrls = [
+            'ff1.jpg',
+            'ff2.jpg',
+            'ff3.jpg',
+            'ff4.jpg',
+            'ff5.jpg',
+            'ff6.jpg',
+            'ff7.jpg'
+        ];
+        let currentPhoto = 0;
+        const photoElement = document.getElementById('dadPhoto');
+        setInterval(() => {
+            currentPhoto = (currentPhoto + 1) % photoUrls.length;
+            photoElement.src = photoUrls[currentPhoto];
+        }, 2500);
+
+        function showTrophy() {
+            const trophyContainer = document.getElementById('trophyContainer');
+            const button = document.querySelector('.trophy-button');
+            
+            trophyContainer.classList.add('show');
+            button.style.display = 'none';
+            
+            createConfettiBurst();
+            createFloatingCelebration();
+        }
+
+        function createConfettiBurst() {
+            const colors = ['#64ffda', '#1de9b6', '#00e5ff', '#ffd700', '#ff9800', '#e91e63'];
+            
+            for (let i = 0; i < 60; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 0.3 + 's';
+                    confetti.style.animationDuration = (3 + Math.random() * 2) + 's';
+                    
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }, i * 80);
+            }
+        }
+
+        function createFloatingCelebration() {
+            const floatingContainer = document.getElementById('floatingContainer');
+            const elements = ['⭐', '🎉', '🏆', '💎', '👑', '🌟'];
+            
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const element = document.createElement('div');
+                    element.className = 'floating-item';
+                    element.innerHTML = elements[Math.floor(Math.random() * elements.length)];
+                    element.style.left = Math.random() * 100 + '%';
+                    element.style.animationDelay = Math.random() * 2 + 's';
+                    element.style.animationDuration = (4 + Math.random() * 2) + 's';
+                    element.style.color = ['#64ffda', '#ffd700', '#1de9b6'][Math.floor(Math.random() * 3)];
+                    
+                    floatingContainer.appendChild(element);
+                    
+                    setTimeout(() => {
+                        element.remove();
+                    }, 7000);
+                }, i * 200);
+            }
+        }
+
+        // Enhanced photo interaction
+        document.querySelector('.photo-frame').addEventListener('click', function() {
+            this.style.transform = 'scale(1.15) rotate(360deg)';
+            this.style.transition = 'all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+            
+            setTimeout(() => {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            }, 1000);
+        });
+
+        // Subtle continuous effects
+        setInterval(() => {
+            if (Math.random() < 0.2) {
+                const element = document.createElement('div');
+                element.className = 'floating-item';
+                element.innerHTML = '✨';
+                element.style.left = Math.random() * 100 + '%';
+                element.style.fontSize = '1.2rem';
+                element.style.animationDuration = '8s';
+                element.style.opacity = '0.4';
+                element.style.color = '#64ffda';
+                
+                document.getElementById('floatingContainer').appendChild(element);
+                
+                setTimeout(() => {
+                    element.remove();
+                }, 8000);
+            }
+        }, 4000);
+    </script>
+</body>
+</html>
